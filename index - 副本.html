@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Packing a home or office can be overwhelming when preparing for a move or simply putting your belongings in storage. Let our professionally trained packers help you."/>
+  <meta name="keywords" content="alpacka, packing, service, etobicoke, toronto, condominium, home, office, storage, organizing"/>
+  <title>alPacka - Your Packing Specialist</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+  <!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+	-->
+  <link href="css/bootstrap-datepicker.css" rel="stylesheet">
+  <!--<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">-->
+  <link href="css/animate.min.css" rel="stylesheet"> 
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/lightbox.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
+  <link href="css/clock.css" rel="stylesheet">
+  <link href="css/responsive.css" rel="stylesheet">
+  <link href="css/hello.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+  <![endif]-->
+  
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+  <!--<style type="text/css">
+	.ui-datepicker-header {
+		background: #000;
+		border: 1px solid #555;
+		color: #EEE;
+	}
+</style>-->
+  <script type="text/javascript">
+    function getValue(elements) {
+      var value = '';
+
+      for(var i=0; i<elements.length; i++) {
+        var ele = elements[i];
+        if (ele.checked) {
+          value += ele.value + ', ';
+        }
+      };
+
+      return value;
+    }
+
+    function send() {
+      // var to = 'panorigin@gmail.com',
+      var to = 'info@panorigin.com',
+          subject = '',
+          content = '';
+
+      var contacts = document.getElementById('main-contact-form').elements;
+      var name = contacts[0].value || '';
+      var email = contacts[1].value;
+      var phone = contacts[2].value;
+      var moving_date = contacts[3].value;
+	  var pickup_zip = contacts[4].value;
+	  var dropoff_zip = contacts[5].value;
+      var move_size = contacts[6].value;
+	  var media = contacts[7].value;
+  
+      var errorBox = document.getElementById('error');
+      var submitButton = document.getElementById('contactSubmit');
+      var contactForm = document.getElementById('contact-form');
+      var summary = document.getElementById('summary');
+
+      var subject = name;
+      content += 'Name: ' + name + '\n';
+
+      var contactApproach = '';
+      if (email === '') {
+          errorBox.innerHTML = 'Please provide your email number so I can email you';
+          return;
+        } 
+     if (phone === '') {
+          errorBox.innerHTML = 'Please provide your phone number so I can call you';
+          return;
+        } 
+        subject += ' ' + phone;
+        content += 'Email: ' + email + '\n';
+        content += 'Phone: ' + phone + '\n';
+        contactApproach = 'call';
+   
+      content += 'Moving date: ' + moving_date + '\n';
+      content += 'Pick up zip: ' + pickup_zip + '\n';
+	  content += 'drop off zip: ' + dropoff_zip + '\n';
+	  content += 'Moving size: ' + move_size + '\n';
+      content += 'Where did you hear from us: ' + media + '\n';
+      
+      var email = "From: 'alPacka Packing'\r\n"+
+          "To:  "+ to +"\r\n"+
+          "Subject: "+subject+"\r\n"+
+          "\r\n"+
+          content;
+
+      errorBox.innerHTML = '';
+      submitButton.innerHTML = 'Done';
+      submitButton.disabled = true;
+
+      summary.classList.add('show');
+      var summaryMsg = '';
+      if (name) {
+        summaryMsg = 'Thank you ' + name + '! I will be contacting you shortly!';
+      } else {
+        summaryMsg = 'Thank you! I will be contacting you shortly!';
+      }
+      summary.innerHTML = summaryMsg;
+
+      // sendMessage(email, function () {
+      //   console.log(arguments);
+      // });
+      var data = {
+          name: 'alPacka Packing',
+          email: 'info@panorigin.com',
+          to: to,
+          subject: subject,
+          message: content,
+        };
+
+        console.log(data);
+      $.ajax({
+        type: 'POST',
+        url: 'sendemail.php',
+        dataType: 'json',
+        data: {
+          name: 'alPacka Packing',
+          email: 'info@panorigin.com',
+          to: to,
+          subject: subject,
+          message: content,
+        },
+        success: function(obj, status) {
+          console.debug(obj, status);
+          debugger
+        }
+      })
+    }
+
+  </script>
+
+  <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+
+
+</head><!--/head-->
+
+<body>
+
+  <!--.preloader-->
+  <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+  <!--/.preloader-->
+
+  <header id="home">
+    <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+	<ol class="carousel-indicators">
+        <li data-target="#home-slider" data-slide-to="0" class="active"></li>
+        <li data-target="#home-slider" data-slide-to="1" class=""></li>
+        <li data-target="#home-slider" data-slide-to="2" class=""></li>
+		<li data-target="#home-slider" data-slide-to="3" class=""></li>
+    </ol>    
+	<div class="carousel-inner">
+	  
+        <div class="item active" style="background-image: url(images/slider/1.jpg)">
+          <div class="caption">
+		   <div class="hello slide1">
+			<span></span>
+			<ul>
+			<li style="opacity: 0;">Hello</li>
+			<li style="opacity: 0;">Hola</li>
+			<li style="opacity: 0;">Bonjour</li>
+			<li style="opacity: 0;">Olá</li>
+			<li style="opacity: 0;">Ciao</li>
+			<li style="opacity: 0;">مرحبا</li>
+			<li style="opacity: 0;">こんにちは</li>
+			<li style="opacity: 0;">你好</li>
+			</ul>
+			<span class="greeting" style="padding-left: 0px;"></span>	
+			<span> , we are alpacka<span>
+			</div>
+            <h1 class="animated fadeInLeftBig">
+			<br>
+				Your <span>Packing</span> specialists</span>
+			</h1>
+			
+            <p class="animated fadeInRightBig">for your home or office packing needs</p>
+            <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">Start now</a>
+          </div>
+        </div>
+        <div class="item" style="background-image: url(images/slider/2.jpg)">
+          <div class="caption">
+		  <div class="hello slide2">
+			<span></span>
+			<ul>
+			<li style="opacity: 0;">Hello</li>
+			<li style="opacity: 0;">Hola</li>
+			<li style="opacity: 0;">Bonjour</li>
+			<li style="opacity: 0;">Olá</li>
+			<li style="opacity: 0;">Ciao</li>
+			<li style="opacity: 0;">مرحبا</li>
+			<li style="opacity: 0;">こんにちは</li>
+			<li style="opacity: 0;">你好</li>
+			</ul>
+			<span id="greeting" style="padding-left: 0px;"></span>	
+			<span> , we are alpacka<span>
+			</div>
+            <h1 class="animated fadeInLeftBig">A service that you can <span>trust</span></h1>
+            <p class="animated fadeInRightBig">We offer FULL LIABILITY INSURANCE</p>
+            <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">Start now</a>
+          </div>
+        </div>
+        <div class="item" style="background-image: url(images/slider/3.jpg)">
+          <div class="caption">
+		  <div class="hello slide3">
+			<span></span>
+			<ul>
+			<li style="opacity: 0;">Hello</li>
+			<li style="opacity: 0;">Hola</li>
+			<li style="opacity: 0;">Bonjour</li>
+			<li style="opacity: 0;">Olá</li>
+			<li style="opacity: 0;">Ciao</li>
+			<li style="opacity: 0;">مرحبا</li>
+			<li style="opacity: 0;">こんにちは</li>
+			<li style="opacity: 0;">你好</li>
+			</ul>
+			<span class="greeting" style="padding-left: 0px;"></span>	
+			<span> , we are alpacka<span>
+			</div>
+            <h1 class="animated fadeInLeftBig"><span>Professionalism</span></h1>
+            <p class="animated fadeInRightBig">We will be on time and on budget</p>
+            <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">Start now</a>
+          </div>
+        </div>
+        <div class="item" style="background-image: url(images/slider/4.jpg)">
+          <div class="caption">
+		  <div class="hello slide4">
+			<span></span>
+			<ul>
+			<li style="opacity: 0;">Hello</li>
+			<li style="opacity: 0;">Hola</li>
+			<li style="opacity: 0;">Bonjour</li>
+			<li style="opacity: 0;">Olá</li>
+			<li style="opacity: 0;">Ciao</li>
+			<li style="opacity: 0;">مرحبا</li>
+			<li style="opacity: 0;">こんにちは</li>
+			<li style="opacity: 0;">你好</li>
+			</ul>
+			<span id="greeting1" style="padding-left: 0px;"></span>	
+			<span> , we are alpacka<span>
+			</div>
+            <h1 class="animated fadeInLeftBig"><span>Flat rates</span> in the Greater Toronto Area</h1>
+            <p class="animated fadeInRightBig">With no hidden fees. You only pay for the time required to complete the work after the minimum charge.</p>
+            <a data-scroll class="btn btn-start animated fadeInUpBig" href="#services">Start now</a>
+          </div>
+        </div>
+      </div>
+      <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+      <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
+
+      <a id="tohash" href="#services"><i class="fa fa-angle-down"></i></a>
+
+    </div><!--/#home-slider-->
+    <div class="main-nav">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">
+            <h1>
+              <img class="img-responsive" src="images/animal.png" alt="logo" style='display: inline-block;'>
+              <img class="img-responsive" src="images/logo.png" alt="logo" style='display: inline-block;'>
+            </h1>
+          </a>                    
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">                 
+            <li class="scroll active"><a href="#home">Home</a></li>
+            <li class="scroll"><a href="#services">Service</a></li> 
+            <li class="scroll"><a href="#about-us">About Us</a></li>
+            <li class="scroll"><a href="#estimate">Estimate</a></li>
+            <li class="scroll"><a href="#faq">FAQ</a></li>
+            <li class="scroll"><a href="#contact">Contact</a></li>       
+          </ul>
+        </div>
+      </div>
+    </div><!--/#main-nav-->
+  </header><!--/#home-->
+  
+  <section id="services">
+    <div class="container">
+      <div class="heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+        <div class="row">
+          <div class="text-center col-sm-8 col-sm-offset-2">
+            <h2>The alPacka Therapy</h2>
+            <p>We do not move you, We pack you</p>
+            <P>Packing is maddening! Not only can it be physically painful, it can be a mental exercise trying to keep everything organized as you completely uproot your whole life. If your home is the peaceful place you can retreat to when the World gets hard, having to dismantle it can leave you free-floating in a sea of stress. There is really only one way through a move.</P>
+          </div>
+        </div> 
+      </div>
+      <div class="text-center our-services">
+        <div class="row">
+          <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <div class="service-icon">
+              <i class="fa fa-thumbs-o-up"></i>
+            </div>
+            <div class="service-info">
+              <h3>Guaranteed Satisfaction</h3>
+              <p>Here at alPACKa, our number one priority is customer satisfaction.  We strive to provide a quality and affordable packing service to each of our clients.</p>
+            </div>
+          </div>
+          <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="450ms">
+            <div class="service-icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <div class="service-info">
+              <h3>Personalized Service</h3>
+              <p>For unique situations, we work with you to ensure customized safe and secure packing.</p>
+            </div>
+          </div>
+          <div class="col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="550ms">
+            <div class="service-icon">
+              <i class="fa fa-archive"></i>
+            </div>
+            <div class="service-info">
+              <h3>Modern Packing Methods</h3>
+              <p>We are completely up-to-date with packing methods so you can be rest assured that your breakable and high-valued items are safe and secure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!--/#services-->
+  
+  <section id="about-us" class="parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12" style="text-align: center">
+          <h2>About Us</h2>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+              
+              <h2>Who are we</h2>
+              <p>We make your packing needs hassle free.</p>
+              <p>We operate on a flat fee basis.  No hidden fees!</p>
+              <p>We label each box.</p>
+              <p>Most importantly, we are punctual and reliable.</p>
+              <p>We put quality in what we do.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+              <h2>What we offer</h2>
+              <p><h3><b>A service that you can trust.</b></h3>
+                We offer FULL LIABILITY INSURANCE.</p>
+              <p><h3><b>Professionalism.</b></h3>
+                We will be on time and on budget.</p>
+              <p><h3><b>Flat rates  in the Greater Toronto Area.</b></h3>
+                With no hidden fees.  You only pay for the time required to complete the work after the minimum charge.</p>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!--/#about-us-->
+
+  <section id="estimate">
+    <div id="estimate">
+      <div class="container">
+        <div class="row">
+          <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <h2>Estimate</h2>
+          </div>
+        </div>
+        <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+          <div class="row" id='contact-form'>
+		  <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+              <form id="main-contact-form" name="contact-form" method="post" action="#">
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control" placeholder="Name" required="required">
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control" placeholder="Email Address" required="required">
+                </div>
+                <div class="form-group">
+                  <input type="phone" name="phone" class="form-control" placeholder="Phone" required="required">
+                </div>
+                <div class="form-group">
+					<div class='input-group date' id='datetimepicker1'>
+						<input type='text' class="form-control" />
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+                  <!--<input type="text" id="datepicker1" name="date" placeholder="Moving date" required="required">-->
+                </div>
+                <div class="form-group">
+					<div class="row">
+						<div class="col-sm-6">
+							<input type="text" name="pickup_zip" class="form-control" placeholder="Pick up zip" required="required">
+						</div>
+						<div class="col-sm-6">
+							<input type="text" name="dropoff_zip" class="form-control" placeholder="Drop off zip" required="required">
+						</div>
+					</div>
+                </div>
+                <div class="form-group">
+                  <select name="move_size" class="form-control"> 
+					<option value="" selected>Select move size</option>
+					<option value="Studio">Studio</option>
+					<option value="2 bedroom(small size,few items)">2 bedroom(small size,few items)</option>
+					<option value="2 bedroom(avg.size,avg.items)">2 bedroom(avg.size,avg.items)</option>
+					<option value="2 bedroom(large,many items)">2 bedroom(large,many items)</option>
+					<option value="3 bedroom(avg.size,avg.items)">3 bedroom(avg.size,avg.items)</option>
+					<option value="3 bedroom(large,many.items)">3 bedroom(large,many.items)</option>
+				  </select>
+                </div>
+				<div class="form-group">
+                  <select name="media" class="form-control">
+					<option value="" selected>Where did you hear us</option>
+					<option value="friends">friends</option>
+					<option value="websites">websites</option>
+				  </select>
+                </div> 				
+              </form>   
+            </div>
+         <div class="col-sm-4"></div>
+          </div>
+          <div class="row">
+		  <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <button id='contactSubmit' type="submit" class="btn-submit" onclick="send()">Send Now</button>
+                <div id="error"></div>
+				<div id='summary'></div>
+                <div id="authorize-div" style="display: none">
+                </div>
+              </div>
+            </div>
+           <!-- <div class="col-sm-4" id='summary'></div>-->
+          </div>
+        </div>
+      </div>
+    </div>        
+  </section>
+
+  <section id="faq" class="parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <h2>FAQ</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row count">
+        <div class="col-sm-5 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+          <h4>Q: Are your movers professionals?</h4>
+          <p>A: All of staff receive in-house training.</p>
+          <BR>
+          <h4>Q: Why am I paying for travel time?</h4>
+          <p>A: We have lower hourly rates. To get our team and packing materials to your location requires a minimum cost for us.</p>
+          <BR>
+          <h4>Q: What do you pack?</h4>
+          <p>A: We pack your home or office when you might be moving, cleaning, organizing or simply wanting to just make a change.</p>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5 col-xs-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+          <h4>Q: Do you do custom jobs?</h4>
+          <p>A: Ask. Our goal is customer satisfaction so we're open to taking on custom packing jobs to make you happy.</p>
+          <BR>
+          <h4>Q: Is a deposit required?</h4>
+          <p>A: We require a deposit to secure the booking. You will be advised of the amount of the deposit at the time we provide you with our estimate.</p>
+        </div>            
+      </div>
+    </div>
+  </section><!--/#faq-->
+
+  <section id="pricing">
+    <div class="container">
+      <div class="row">
+        <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1200ms" data-wow-delay="300ms">
+          <h2>Estimated Costs</h2>
+          <p>No Hidden Fees</p>
+        </div>
+      </div>
+      <div class="pricing-table">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="single-table wow flipInY" data-wow-duration="1000ms" data-wow-delay="300ms">
+              <h3>Travel Time</h3>
+              <div class="price">
+                <span>Rates are </span>$1.75<span> per kilometer.</span>
+              </div>
+              <p>Distances are calculated from our Park Lawn Rd., Etobicoke, head office to your location.</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="single-table wow flipInY" data-wow-duration="1000ms" data-wow-delay="500ms">
+              <h3>Staff Time</h3>
+              <div class="price">
+                $100<span>/hour</span>
+              </div>
+              <p>2 Packers, Minimum 3 hours</p>
+              <p>Additional: Hr. $100 each/plus applicable tax.<BR>
+                 1/2 Hr. $50 each/plus applicable tax.</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="single-table wow flipInY" data-wow-duration="1000ms" data-wow-delay="800ms">
+              <h3>Packing materials</h3>
+              
+              <ul>
+                <li>Boxes</li>
+                <li>Bubblewrap</li>
+                <li>Cartons</li>
+                <li>Tape</li>
+                <li>Paper</li>
+                <li>Etc.</li>
+              </ul>
+              <p>(Call for further details on packing material costs.)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!--/#pricing-->
+
+  <section id="contact">
+    <div id="contact-us" class="parallax">
+      <div class="container">
+        <div class="row">
+          <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <h2>Contact Us</h2>
+          </div>
+        </div>
+        <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+          <div class="row">
+            <div class="col-sm-4"></div>
+			 <div class="col-sm-2"><img class="img-responsive" src="images/barcode1.png" alt="logo"></div>
+            <div class="col-sm-6">
+              <div class="contact-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <ul class="address">
+                  <li><i class="fa fa-map-marker"></i> <span> Address:</span> Park Lawn Rd., Etobicoke </li>
+                  <li><i class="fa fa-phone"></i> <span> Phone:</span> Call us free! <a href="tel:+12895008111">289-500-8111</a> </li>
+                  <li><i class="fa fa-envelope"></i> <span> Email:</span><a href="mailto:info@panorigin.com"> info@panorigin.com</a></li>
+                  <li><i class="fa fa-globe"></i> <span> Website:</span> <a href="#">www.alpacka.com</a></li>
+                </ul>
+              </div>                            
+            </div>
+			
+          </div>
+        </div>
+      </div>
+    </div>        
+  </section><!--/#contact-->
+  <div class="navbar navbar-default navbar-fixed-bottom">
+	<div id="clock-container">
+		<div id="liveclock">
+			<div class="hand hour" style="transform: rotate(0deg);"></div>
+			<div class="hand minute" style="transform: rotate(0deg);"></div>
+			<div class="hand second" style="transform: rotate(0deg);"></div>
+		</div>
+		<p>
+		<strong>alpacka</strong>
+		<br>Park Lawn Rd., Etobicoke
+		<br>Tel: 289-500-8111
+		<br>
+		</p>
+	</div>
+  </div>
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+-->
+  <!--<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>  
+  <script src="js/bootstrap-datepicker.js"></script>
+  
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.inview.min.js"></script>
+  <script type="text/javascript" src="js/wow.min.js"></script>
+  <script type="text/javascript" src="js/mousescroll.js"></script>
+  <script type="text/javascript" src="js/smoothscroll.js"></script>
+  <script type="text/javascript" src="js/jquery.countTo.js"></script>
+  <script type="text/javascript" src="js/lightbox.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/clock.js"></script>
+  <script src="js/hello.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){ 
+	helloNext();
+
+	});
+</script>
+<script type="text/javascript">
+$(function(){ 
+
+	$('#home-slider').bind('slide.bs.carousel', function (e) {
+    console.log('slide event!');
+});
+
+$('#home-slider').bind('slid.bs.carousel', function (e) {
+    console.log("slid event!");
+});
+});
+
+</script>
+  <script type="text/javascript">
+          $.noConflict();  //Not to conflict with other scripts
+  jQuery(document).ready(function($) {
+   $('#datetimepicker1').datetimepicker();
+   });
+</script>
+<script>
+window.onload = function() {            
+    function clock() {
+        updateclock();
+    }
+    setInterval(clock, 1000);
+}
+</script>
+  <!-- JS includes -->
+  <script type="text/javascript">
+   if (document.location.protocol != 'https:') document.write('\x3Cscript src="http://musecdn2.businesscatalyst.com/scripts/4.0/jquery-1.8.3.min.js" type="text/javascript">\x3C/script>');
+  </script>
+    <script type="text/javascript">
+     window.jQuery || document.write('\x3Cscript src="scripts/jquery-1.8.3.min.js" type="text/javascript">\x3C/script>');
+  </script>
+    <script src="scripts/museutils.js?275725342" type="text/javascript"></script>
+    <script src="scripts/jquery.musemenu.js?4042164668" type="text/javascript"></script>
+    <script src="scripts/webpro.js?3883484123" type="text/javascript"></script>
+    <script src="scripts/musewpslideshow.js?360574455" type="text/javascript"></script>
+    <script src="scripts/jquery.museoverlay.js?342093292" type="text/javascript"></script>
+    <script src="scripts/touchswipe.js?4218319045" type="text/javascript"></script>
+    <script src="scripts/jquery.musepolyfill.bgsize.js?185257658" type="text/javascript"></script>
+    <script src="scripts/jquery.watch.js?3999102769" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.hello span {
+    color: #fff;
+    display: inline !important;
+    overflow: hidden;
+    padding-left: 0;
+    transition-property: none;
+}
+
+.hello ul {
+   position:relative;
+   list-style-type: none;
+}
+
+.hello ul li{
+  position: absolute;
+  top: 20%;
+  color: #fff !important;
+}
+
+/*ul li{
+  display: inline;
+}*/

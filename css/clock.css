@@ -1,0 +1,96 @@
+#clock {
+    bottom: 30px;
+    left: 50px;
+    overflow: hidden;
+    position: absolute;
+}
+#clock p {
+    color: #000;
+    float: left;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    line-height: 14px;
+    margin: 0 0 0 20px;
+    padding: 8px 0 0;
+}
+
+#clock p a {
+    color: #2c2c2e;
+    font-family: "NeutralStd-Medium";
+    font-weight: normal;
+    text-decoration: none;
+}
+#clock p a:hover {
+    color: #fff;
+}
+#clock_hands {
+    background: rgba(0, 0, 0, 0) url("../images/clock.png") no-repeat scroll 0 0 / contain ;
+    float: left;
+    height: 70px;
+    position: relative;
+    width: 70px;
+}
+.hand, .hand.hour {
+    background: #8dcae5 none repeat scroll 0 0;
+    height: 30%;
+    left: 50%;
+    margin-left: -2px;
+    position: absolute;
+    top: 20%;
+    transform: rotate(0deg);
+    transform-origin: center bottom 0;
+    width: 4px;
+}
+.hand.minute {
+    height: 45%;
+    margin-left: -2px;
+    top: 5%;
+    width: 4px;
+}
+.hand.second {
+    background: #e5a88d none repeat scroll 0 0;
+    height: 50%;
+    margin-left: -1px;
+    top: 0;
+    transition-property: none;
+    width: 2px;
+}
+@media (max-width: 1050px) {
+#clock {
+    bottom: 30px;
+    left: 50px;
+    overflow: hidden;
+    position: absolute;
+}
+#clock p {
+    color: #2c2c2e;
+    float: left;
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    line-height: 14px;
+    margin: 0 0 0 20px;
+    padding: 8px 0 0;
+}
+#clock p a {
+    color: #2c2c2e;
+    font-family: "Helvetica",Arial,sans-serif;
+    font-weight: normal;
+    text-decoration: none;
+}
+#clock p a:hover {
+    color: #fff;
+}
+}
+@media (max-width: 850px) {
+
+#clock {
+    left: 30px;
+}
+
+@media (max-width: 480px) {
+
+#clock {
+    display: none;
+}
+
+}
